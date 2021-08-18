@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config.json');
 
+// TODO: replace with DB call
 const users = [{id: 1, userName: 'Erwee', encryptedPassword: '123456'}]
 
 async function authenticate({userName, password}){
@@ -12,8 +13,7 @@ async function authenticate({userName, password}){
         }
     }
 
-    // TODO: convert incoming password to same as saved encrypted password
-    
+    // TODO: convert incoming password to same as saved encrypted password    
     const user = users.find(u => u.userName === userName && u.encryptedPassword === password);
 
     if(!user){
@@ -23,7 +23,8 @@ async function authenticate({userName, password}){
     }
 
     const token = jwt.sign({
-        sub: user.id
+        sub: user.id,
+        'test_claim': 'test'
     }, 
     config.jwt_secret,
     {
@@ -34,21 +35,3 @@ async function authenticate({userName, password}){
 }
 
 module.exports = {authenticate};
-
-// class AuthService{
-//     async authenticate({userName, password}){
-//         const user = users.find(u => u.userName === userName && u.password === password);
-
-//         const token = jwt.sign({
-//             sub: user.id
-//         }, 
-//         config.jwt_secret,
-//         {
-//             expiresIn: '7d'
-//         });
-
-//         return token;
-//     }
-// }
-
-// module.exports = AuthService;

@@ -13,7 +13,9 @@ authController.post('/auth/login', async (req, res) => {
         password: password
     });
 
-    tokenResponse['errorMessage'] ? res.status(400).send(tokenResponse['errorMessage']) : res.send(tokenResponse);    
+    tokenResponse['errorMessage'] ? 
+        res.status(400).send(tokenResponse['errorMessage']) : 
+        res.send(tokenResponse);    
 });
 
 authController.post('/auth/register', (req, res) => {
@@ -21,7 +23,7 @@ authController.post('/auth/register', (req, res) => {
 });
 
 authController.post('/auth/test', (req, res) => {
-
+    res.status(200).send('auth success');
 });
 
 module.exports = {authController};
