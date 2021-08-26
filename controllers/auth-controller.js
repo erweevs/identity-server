@@ -18,8 +18,16 @@ authController.post('/auth/login', async (req, res) => {
         res.send(tokenResponse);    
 });
 
-authController.post('/auth/register', (req, res) => {
+authController.post('/auth/register', async (req, res) => {
+    const userName = req.body['userName'];
+    const password = req.body['password'];
+    
+    await authService.register({
+        userName: userName,
+        password: password
+    });
 
+    res.status(200).send('OK');
 });
 
 authController.post('/auth/test', (req, res) => {

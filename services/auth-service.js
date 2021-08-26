@@ -28,10 +28,27 @@ async function authenticate({userName, password}){
     }, 
     config.jwt_secret,
     {
-        expiresIn: '7d'
+        expiresIn: '2min'
     });
 
     return token;
 }
 
-module.exports = {authenticate};
+async function register({userName, password}){
+    // TODO: check email fromat
+
+    // TODO: check password strength
+
+    // TODO: encrypt the password
+    const encryptedPassword = password;
+
+    // insert the user
+    users.push({
+        // TODO: generate unique key
+        id: 2,
+        userName: userName,
+        encryptedPassword: encryptedPassword
+    });
+}
+
+module.exports = {authenticate, register};
